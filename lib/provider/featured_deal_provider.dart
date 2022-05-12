@@ -24,6 +24,7 @@ class FeaturedDealProvider extends ChangeNotifier {
         _featuredDealList.clear();
         _featuredDealProductList =[];
         apiResponse.response.data.forEach((fDeal) => _featuredDealList.add(FeaturedDealModel.fromJson(fDeal)));
+       print(apiResponse.response.data);
         _featuredDealList.forEach((product) {
           _featuredDealProductList.add(product.product);
         });

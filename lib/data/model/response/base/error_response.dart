@@ -33,14 +33,14 @@ class ErrorResponse {
 /// message : "The last name field is required."
 
 class Errors {
-  String _code;
+  int _code;
   String _message;
 
-  String get code => _code;
+  int get code => _code;
   String get message => _message;
 
   Errors({
-      String code, 
+      int code,
       String message}){
     _code = code;
     _message = message;

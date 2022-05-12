@@ -13,6 +13,8 @@ import 'package:provider/provider.dart';
 
 class ProductTitleView extends StatelessWidget {
   final Product productModel;
+  final List<String> label = ["piece", "box"];
+
   ProductTitleView({@required this.productModel});
 
   @override
@@ -130,41 +132,46 @@ class ProductTitleView extends StatelessWidget {
             ]) : SizedBox(),
             productModel.colors.length > 0 ? SizedBox(height: Dimensions.PADDING_SIZE_SMALL) : SizedBox(),
 
-            // Variation
-            productModel.choiceOptions!=null && productModel.choiceOptions.length>0?
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: productModel.choiceOptions.length,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                  Text('${getTranslated('available', context)}'+' '+'${productModel.choiceOptions[index].title} :',
-                      style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
-                  SizedBox(width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                  Expanded(
-                    child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 5,
-                        childAspectRatio: (1 / .7),
-                      ),
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: productModel.choiceOptions[index].options.length,
-                      itemBuilder: (context, i) {
-                        return Center(
-                          child: Text(productModel.choiceOptions[index].options[i], maxLines: 1,
-                              overflow: TextOverflow.ellipsis, style: titilliumRegular.copyWith(
-                                fontSize: Dimensions.FONT_SIZE_DEFAULT,
-                               )),
-                        );
-                      },
-                    ),
-                  ),
-                ]);
-              },
-            ):SizedBox(),
+           // Variation
+           //  productModel.choiceOptions!=null && productModel.choiceOptions.length>0?
+           //  ListView.builder(
+           //    shrinkWrap: true,
+           //    itemCount: productModel.choiceOptions.length,
+           //    physics: NeverScrollableScrollPhysics(),
+           //    itemBuilder: (context, index) {
+           //      return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+           //        Text('${getTranslated('available', context)}'+' '+'${productModel.choiceOptions[index].title} :',
+           //            style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
+           //        SizedBox(width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+           //        Expanded(
+           //          child: GridView.builder(
+           //            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+           //              crossAxisCount: 4,
+           //              crossAxisSpacing: 5,
+           //              mainAxisSpacing: 5,
+           //              childAspectRatio: (1 / .7),
+           //            ),
+           //            shrinkWrap: true,
+           //            physics: NeverScrollableScrollPhysics(),
+           //            itemCount: productModel.choiceOptions[index].options.length,
+           //            itemBuilder: (context, i) {
+           //              return Center(
+           //                child: Row(
+           //                  children: [
+           //                    Text(productModel.choiceOptions[index].options[i], maxLines: 1,
+           //                        overflow: TextOverflow.ellipsis, style: titilliumRegular.copyWith(
+           //                          fontSize: Dimensions.FONT_SIZE_DEFAULT,
+           //                         )),
+           //
+           //                  ],
+           //                ),
+           //              );
+           //            },
+           //          ),
+           //        ),
+           //      ]);
+           //    },
+           //  ):SizedBox(),
 
           ]);
         },
