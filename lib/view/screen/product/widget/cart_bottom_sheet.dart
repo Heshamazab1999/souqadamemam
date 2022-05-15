@@ -105,7 +105,6 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                   price,
                   widget.product.discount,
                   widget.product.discountType);
-
               double priceWithQuantity = priceWithDiscount * details.quantity;
               String ratting = widget.product.rating != null &&
                       widget.product.rating.length != 0
@@ -325,118 +324,92 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                         ? SizedBox(height: Dimensions.PADDING_SIZE_SMALL)
                         : SizedBox(),
 
-                    Row(
-                      children: [
-                        Text('${getTranslated('packet', context)}' + "  : ",
-                            style: robotoBold),
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Provider.of<ProductDetailsProvider>(context,
-                                        listen: false)
-                                    .setQuantity(1);
-                                Provider.of<ProductDetailsProvider>(context,
-                                        listen: false)
-                                    .changeFun();
-                                // Provider.of<ProductDetailsProvider>(context,
-                                //         listen: false)
-                                //     .addPrice(widget.product.unitPrice);
-                              },
-                              child: Container(
-                                height: 30,
-                                width: 80,
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).highlightColor,
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: details.check != true
-                                      ? null
-                                      : Border.all(
-                                          color: Theme.of(context).primaryColor,
-                                          width: 2),
-                                ),
-                                child: Center(
-                                  child: FittedBox(
-                                    child: Text(
-                                        getTranslated(widget.label[0], context),
+                    // Variation
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 1,
+                      // itemCount: widget.product.choiceOptions.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                  '${getTranslated('packet', context)}' +
+                                      "  : ",
+                                  style: robotoBold),
+                              // Text('${getTranslated('available', context)} '+' '+'${widget.product.choiceOptions[index].title} : ', style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_DEFAULT)),
+                              // SizedBox(
+                              //     width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GridView.builder(
+                                    reverse: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 4,
+                                      crossAxisSpacing: 5,
+                                      mainAxisSpacing: 15,
+                                      childAspectRatio: (1 / .55),
+                                    ),
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: 2,
 
-                                        // widget
-                                        //     .product
-                                        //     .choiceOptions[index]
-                                        //     .options[i],
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: titilliumRegular.copyWith(
-                                          fontSize:
-                                              Dimensions.FONT_SIZE_DEFAULT,
-                                          color: Theme.of(context).primaryColor,
-                                        )),
+                                    // itemCount: widget.product.choiceOptions[index].options.length,
+                                    itemBuilder: (context, i) {
+                                      return InkWell(
+                                        onTap: () {
+                                          Provider.of<ProductDetailsProvider>(
+                                              context,
+                                              listen: false)
+                                              .setQuantity(1);
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: Dimensions
+                                                  .PADDING_SIZE_EXTRA_SMALL),
+                                          decoration: BoxDecoration(
+                                            //color: details.variationIndex[index] != i ? Theme.of(context).highlightColor : ColorResources.getPrimary(context),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            border: Border.all(
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                                width: 2),
+                                          ),
+                                          child: Center(
+                                            child: FittedBox(
+                                              child: Text(
+                                                  getTranslated(
+                                                      widget.label[i], context),
+
+                                                  // widget
+                                                  //     .product
+                                                  //     .choiceOptions[index]
+                                                  //     .options[i],
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style:
+                                                      titilliumRegular.copyWith(
+                                                    fontSize: Dimensions
+                                                        .FONT_SIZE_DEFAULT,
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                  )),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Provider.of<ProductDetailsProvider>(context,
-                                        listen: false)
-                                    .changeFun();
-                                // Provider.of<ProductDetailsProvider>(context,
-                                //         listen: false)
-                                //     .addPrice(double.parse(
-                                //         widget.product.largeUnitPrice));
-
-                                Provider.of<ProductDetailsProvider>(context,
-                                        listen: false)
-                                    .setQuantity(
-                                        int.parse(
-                                            widget.product.largeUnitPrice));
-                              },
-                              child: Container(
-                                height: 30,
-                                width: 80,
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).highlightColor,
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: details.check != false
-                                      ? null
-                                      : Border.all(
-                                          color: Theme.of(context).primaryColor,
-                                          width: 2),
-                                ),
-                                child: Center(
-                                  child: FittedBox(
-                                    child: Text(
-                                        getTranslated(
-                                                widget.label[1], context) +
-                                            "=" +
-                                            widget.product.largeUnitQuantity,
-
-                                        // widget
-                                        //     .product
-                                        //     .choiceOptions[index]
-                                        //     .options[i],
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: titilliumRegular.copyWith(
-                                          fontSize:
-                                              Dimensions.FONT_SIZE_DEFAULT,
-                                          color: Theme.of(context).primaryColor,
-                                        )),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+                            ]);
+                      },
                     ),
 
                     SizedBox(

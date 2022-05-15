@@ -128,8 +128,9 @@ class ProductDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addPrice(double price) {
+  void addPrice(double price,) {
     _price = price;
+    _quantity=1;
     notifyListeners();
   }
 
