@@ -55,9 +55,7 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
         Container(
           padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
           decoration: BoxDecoration(
-            color: Theme
-                .of(context)
-                .highlightColor,
+            color: Theme.of(context).highlightColor,
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(20), topLeft: Radius.circular(20)),
           ),
@@ -69,8 +67,8 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                   : null;
               List<String> _variationList = [];
               for (int index = 0;
-              index < widget.product.choiceOptions.length;
-              index++) {
+                  index < widget.product.choiceOptions.length;
+                  index++) {
                 _variationList.add(widget.product.choiceOptions[index]
                     .options[details.variationIndex[index]]
                     .trim());
@@ -79,8 +77,7 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
               if (_variantName != null) {
                 variationType = _variantName;
                 _variationList.forEach(
-                        (variation) =>
-                    variationType = '$variationType-$variation');
+                    (variation) => variationType = '$variationType-$variation');
               } else {
                 bool isFirst = true;
                 _variationList.forEach((variation) {
@@ -92,7 +89,7 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                   }
                 });
               }
-              double price = widget.product.unitPrice;
+              double price = widget.product.unitPrice.toDouble();
               int _stock = widget.product.currentStock;
               variationType = variationType.replaceAll(' ', '');
               for (Variation variation in widget.product.variation) {
@@ -106,12 +103,12 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
               double priceWithDiscount = PriceConverter.convertWithDiscount(
                   context,
                   price,
-                  widget.product.discount,
+                  widget.product.discount.toDouble(),
                   widget.product.discountType);
               double priceWithQuantity = priceWithDiscount * details.quantity;
-              String ratting = widget.product.rating != null &&
-                  widget.product.rating.length != 0
-                  ? widget.product.rating[0].average
+              String ratting = widget.product.reviews != null &&
+                      widget.product.reviews.length != 0
+                  ? widget.product.reviews[0].average
                   : "0";
 
               return Column(
@@ -127,17 +124,14 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                             height: 25,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Theme
-                                    .of(context)
-                                    .highlightColor,
+                                color: Theme.of(context).highlightColor,
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey[
-                                    Provider
-                                        .of<ThemeProvider>(context)
-                                        .darkTheme
-                                        ? 700
-                                        : 200],
+                                        Provider.of<ThemeProvider>(context)
+                                                .darkTheme
+                                            ? 700
+                                            : 200],
                                     spreadRadius: 1,
                                     blurRadius: 5,
                                   )
@@ -162,8 +156,7 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                                     borderRadius: BorderRadius.circular(5),
                                     border: Border.all(
                                         width: .5,
-                                        color: Theme
-                                            .of(context)
+                                        color: Theme.of(context)
                                             .primaryColor
                                             .withOpacity(.20))),
                                 child: ClipRRect(
@@ -171,12 +164,7 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                                   child: FadeInImage.assetNetwork(
                                     placeholder: Images.placeholder,
                                     image:
-                                    '${Provider
-                                        .of<SplashProvider>(
-                                        context, listen: false)
-                                        .baseUrls
-                                        .productThumbnailUrl}/${widget.product
-                                        .thumbnail}',
+                                        '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productThumbnailUrl}/${widget.product.thumbnail}',
                                     imageErrorBuilder: (c, o, s) =>
                                         Image.asset(Images.placeholder),
                                   ),
@@ -186,17 +174,17 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                               Expanded(
                                 child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(widget.product.name ?? '',
                                           style: titilliumRegular.copyWith(
                                               fontSize:
-                                              Dimensions.FONT_SIZE_LARGE),
+                                                  Dimensions.FONT_SIZE_LARGE),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis),
                                       SizedBox(
                                           height:
-                                          Dimensions.PADDING_SIZE_SMALL),
+                                              Dimensions.PADDING_SIZE_SMALL),
                                       Row(
                                         children: [
                                           Icon(Icons.star,
@@ -218,53 +206,49 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                           children: [
                             widget.product.discount > 0
                                 ? Container(
-                              margin: EdgeInsets.only(
-                                  top: Dimensions
-                                      .PADDING_SIZE_EXTRA_SMALL),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Dimensions
-                                      .PADDING_SIZE_EXTRA_SMALL),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Theme
-                                    .of(context)
-                                    .primaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  PriceConverter.percentageCalculation(
-                                      context,
-                                      widget.product.unitPrice,
-                                      widget.product.discount,
-                                      widget.product.discountType),
-                                  style: titilliumRegular.copyWith(
-                                      color: Theme
-                                          .of(context)
-                                          .cardColor,
-                                      fontSize:
-                                      Dimensions.FONT_SIZE_DEFAULT),
-                                ),
-                              ),
-                            )
+                                    margin: EdgeInsets.only(
+                                        top: Dimensions
+                                            .PADDING_SIZE_EXTRA_SMALL),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: Dimensions
+                                            .PADDING_SIZE_EXTRA_SMALL),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).primaryColor,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        PriceConverter.percentageCalculation(
+                                            context,
+                                            widget.product.unitPrice.toDouble(),
+                                            widget.product.discount.toDouble(),
+                                            widget.product.discountType),
+                                        style: titilliumRegular.copyWith(
+                                            color: Theme.of(context).cardColor,
+                                            fontSize:
+                                                Dimensions.FONT_SIZE_DEFAULT),
+                                      ),
+                                    ),
+                                  )
                                 : SizedBox(width: 93),
                             SizedBox(width: Dimensions.PADDING_SIZE_DEFAULT),
                             widget.product.discount > 0
                                 ? Text(
-                              PriceConverter.convertPrice(
-                                  context, widget.product.unitPrice),
-                              style: titilliumRegular.copyWith(
-                                  color: ColorResources.getRed(context),
-                                  decoration: TextDecoration.lineThrough),
-                            )
+                                    PriceConverter.convertPrice(context,
+                                        widget.product.unitPrice.toDouble()),
+                                    style: titilliumRegular.copyWith(
+                                        color: ColorResources.getRed(context),
+                                        decoration: TextDecoration.lineThrough),
+                                  )
                                 : SizedBox(),
                             SizedBox(width: Dimensions.PADDING_SIZE_DEFAULT),
                             Text(
                               PriceConverter.convertPrice(
-                                  context, widget.product.unitPrice,
+                                  context, widget.product.unitPrice.toDouble(),
                                   discountType: widget.product.discountType,
-                                  discount: widget.product.discount),
+                                  discount: widget.product.discount.toDouble()),
                               style: titilliumRegular.copyWith(
                                   color: ColorResources.getPrimary(context),
                                   fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE),
@@ -278,137 +262,55 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                     // Variant
                     widget.product.colors.length > 0
                         ? Row(children: [
-                      Text(
-                          '${getTranslated('select_variant', context)} : ',
-                          style: titilliumRegular.copyWith(
-                              fontSize: Dimensions.FONT_SIZE_DEFAULT)),
-                      SizedBox(width: Dimensions.PADDING_SIZE_DEFAULT),
-                      SizedBox(
-                        height: 40,
-                        child: ListView.builder(
-                          itemCount: widget.product.colors.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            String colorString = '0xff' +
-                                widget.product.colors[index].code
-                                    .substring(1, 7);
-                            return InkWell(
-                              onTap: () {
-                                Provider.of<ProductDetailsProvider>(
-                                    context,
-                                    listen: false)
-                                    .setCartVariantIndex(index);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions
-                                            .PADDING_SIZE_EXTRA_SMALL),
-                                    border: details.variantIndex == index
-                                        ? Border.all(
-                                        width: 1,
-                                        color: Theme
-                                            .of(context)
-                                            .primaryColor)
-                                        : null),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(Dimensions
-                                      .PADDING_SIZE_EXTRA_SMALL),
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    padding: EdgeInsets.all(Dimensions
-                                        .PADDING_SIZE_EXTRA_SMALL),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color:
-                                      Color(int.parse(colorString)),
-                                      borderRadius:
-                                      BorderRadius.circular(5),
-                                    ),
-                                    //child: details.variantIndex == index ? Icon(Icons.done_all, color: ColorResources.WHITE, size: 12) : null,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ])
-                        : SizedBox(),
-                    widget.product.colors.length > 0
-                        ? SizedBox(height: Dimensions.PADDING_SIZE_SMALL)
-                        : SizedBox(),
-
-                    Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text('${getTranslated('packet', context)}' +
-                              "  : ",
-                              style: robotoBold),
-                          // Text('${getTranslated('available', context)} '+' '+'${widget.product.choiceOptions[index].title} : ', style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_DEFAULT)),
-                          // SizedBox(
-                          //     width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GridView.builder(
-                                reverse: true,
-                                gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4,
-                                  crossAxisSpacing: 5,
-                                  mainAxisSpacing: 15,
-                                  childAspectRatio: (1 / .55),
-                                ),
+                            Text(
+                                '${getTranslated('select_variant', context)} : ',
+                                style: titilliumRegular.copyWith(
+                                    fontSize: Dimensions.FONT_SIZE_DEFAULT)),
+                            SizedBox(width: Dimensions.PADDING_SIZE_DEFAULT),
+                            SizedBox(
+                              height: 40,
+                              child: ListView.builder(
+                                itemCount: widget.product.colors.length,
                                 shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: 2,
-
-                                // itemCount: widget.product.choiceOptions[index].options.length,
-                                itemBuilder: (context, i) {
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  String colorString = '0xff' +
+                                      widget.product.colors[index].code
+                                          .substring(1, 7);
                                   return InkWell(
                                     onTap: () {
-
+                                      Provider.of<ProductDetailsProvider>(
+                                              context,
+                                              listen: false)
+                                          .setCartVariantIndex(index);
                                     },
                                     child: Container(
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: Dimensions
-                                              .PADDING_SIZE_EXTRA_SMALL),
                                       decoration: BoxDecoration(
-                                        //color: details.variationIndex[index] != i ? Theme.of(context).highlightColor : ColorResources.getPrimary(context),
-                                        borderRadius:
-                                        BorderRadius.circular(5),
-                                        border:
-                                       Border.all(
-                                            color: Theme
-                                                .of(context)
-                                                .primaryColor,
-                                            width: 2),
-                                      ),
-                                      child: Center(
-                                        child: FittedBox(
-                                          child: Text(getTranslated(
-                                              widget.label[i], context),
-
-                                              // widget
-                                              //     .product
-                                              //     .choiceOptions[index]
-                                              //     .options[i],
-                                              maxLines: 1,
-                                              overflow:
-                                              TextOverflow.ellipsis,
-                                              style:
-                                              titilliumRegular.copyWith(
-                                                fontSize: Dimensions
-                                                    .FONT_SIZE_DEFAULT,
-                                                color:
-                                                Theme
-                                                    .of(context)
-                                                    .primaryColor,
-                                              )),
+                                          borderRadius: BorderRadius.circular(
+                                              Dimensions
+                                                  .PADDING_SIZE_EXTRA_SMALL),
+                                          border: details.variantIndex == index
+                                              ? Border.all(
+                                                  width: 1,
+                                                  color: Theme.of(context)
+                                                      .primaryColor)
+                                              : null),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(Dimensions
+                                            .PADDING_SIZE_EXTRA_SMALL),
+                                        child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          padding: EdgeInsets.all(Dimensions
+                                              .PADDING_SIZE_EXTRA_SMALL),
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Color(int.parse(colorString)),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          //child: details.variantIndex == index ? Icon(Icons.done_all, color: ColorResources.WHITE, size: 12) : null,
                                         ),
                                       ),
                                     ),
@@ -416,107 +318,189 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                                 },
                               ),
                             ),
-                          ),
+                          ])
+                        : SizedBox(),
+                    widget.product.colors.length > 0
+                        ? SizedBox(height: Dimensions.PADDING_SIZE_SMALL)
+                        : SizedBox(),
 
-                        ]),
+                    //  Row(
+                    //      crossAxisAlignment: CrossAxisAlignment.center,
+                    //      children: [
+                    //        Text('${getTranslated('packet', context)}' + "  : ",
+                    //            style: robotoBold),
+                    //        Text(widget.product.largeUnitQuantity.toString(),
+                    //            style: robotoBold),
+                    //        // Text('${getTranslated('available', context)} '+' '+'${widget.product.choiceOptions[index].title} : ', style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_DEFAULT)),
+                    //        // SizedBox(
+                    //        //     width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                    //        Expanded(
+                    //          child: Padding(
+                    //            padding: const EdgeInsets.all(8.0),
+                    //            child: GridView.builder(
+                    //              reverse: true,
+                    //              gridDelegate:
+                    //                  SliverGridDelegateWithFixedCrossAxisCount(
+                    //                crossAxisCount: 4,
+                    //                crossAxisSpacing: 5,
+                    //                mainAxisSpacing: 15,
+                    //                childAspectRatio: (1 / .55),
+                    //              ),
+                    //              shrinkWrap: true,
+                    //              physics: NeverScrollableScrollPhysics(),
+                    //              itemCount: 2,
+                    //
+                    //              // itemCount: widget.product.choiceOptions[index].options.length,
+                    //              itemBuilder: (context, i) {
+                    //                return InkWell(
+                    //                  onTap: () {},
+                    //                  child: Container(
+                    //                    alignment: Alignment.center,
+                    //                    padding: EdgeInsets.symmetric(
+                    //                        horizontal: Dimensions
+                    //                            .PADDING_SIZE_EXTRA_SMALL),
+                    //                    decoration: BoxDecoration(
+                    //                      //color: details.variationIndex[index] != i ? Theme.of(context).highlightColor : ColorResources.getPrimary(context),
+                    //                      borderRadius: BorderRadius.circular(5),
+                    //                      border: Border.all(
+                    //                          color:
+                    //                              Theme.of(context).primaryColor,
+                    //                          width: 2),
+                    //                    ),
+                    //                    child: Center(
+                    //                      child: FittedBox(
+                    //                        child: Text(
+                    //                            getTranslated(
+                    //                                widget.label[i], context),
+                    //
+                    //                            // widget
+                    //                            //     .product
+                    //                            //     .choiceOptions[index]
+                    //                            //     .options[i],
+                    //                            maxLines: 1,
+                    //                            overflow: TextOverflow.ellipsis,
+                    //                            style: titilliumRegular.copyWith(
+                    //                              fontSize: Dimensions
+                    //                                  .FONT_SIZE_DEFAULT,
+                    //                              color: Theme.of(context)
+                    //                                  .primaryColor,
+                    //                            )),
+                    //                      ),
+                    //                    ),
+                    //                  ),
+                    //                );
+                    //              },
+                    //            ),
+                    //          ),
+                    //        ),
+                    //      ]),
                     // Variation
-                    // ListView.builder(
-                    //   shrinkWrap: true,
-                    //   itemCount: widget.product.choiceOptions.length,
-                    //   physics: NeverScrollableScrollPhysics(),
-                    //   itemBuilder: (context, index) {
-                    //     return Row(
-                    //         crossAxisAlignment: CrossAxisAlignment.center,
-                    //         children: [
-                    //           Text('${getTranslated('packet', context)}' +
-                    //               "  : ",
-                    //               style: robotoBold),
-                    //           // Text('${getTranslated('available', context)} '+' '+'${widget.product.choiceOptions[index].title} : ', style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_DEFAULT)),
-                    //           // SizedBox(
-                    //           //     width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                    //           Expanded(
-                    //             child: Padding(
-                    //               padding: const EdgeInsets.all(8.0),
-                    //               child: GridView.builder(
-                    //                 reverse: true,
-                    //                 gridDelegate:
-                    //                 SliverGridDelegateWithFixedCrossAxisCount(
-                    //                   crossAxisCount: 4,
-                    //                   crossAxisSpacing: 5,
-                    //                   mainAxisSpacing: 15,
-                    //                   childAspectRatio: (1 / .55),
-                    //                 ),
-                    //                 shrinkWrap: true,
-                    //                 physics: NeverScrollableScrollPhysics(),
-                    //                 itemCount: 2,
-                    //
-                    //                 // itemCount: widget.product.choiceOptions[index].options.length,
-                    //                 itemBuilder: (context, i) {
-                    //                   return InkWell(
-                    //                     onTap: () {
-                    //                       Provider.of<ProductDetailsProvider>(
-                    //                           context,
-                    //                           listen: false)
-                    //                           .setCartVariationIndex(index, i);
-                    //                     },
-                    //                     child: Container(
-                    //                       alignment: Alignment.center,
-                    //                       padding: EdgeInsets.symmetric(
-                    //                           horizontal: Dimensions
-                    //                               .PADDING_SIZE_EXTRA_SMALL),
-                    //                       decoration: BoxDecoration(
-                    //                         //color: details.variationIndex[index] != i ? Theme.of(context).highlightColor : ColorResources.getPrimary(context),
-                    //                         borderRadius:
-                    //                         BorderRadius.circular(5),
-                    //                         border:
-                    //                         details.variationIndex[index] !=
-                    //                             i
-                    //                             ? null
-                    //                             : Border.all(
-                    //                             color: Theme
-                    //                                 .of(context)
-                    //                                 .primaryColor,
-                    //                             width: 2),
-                    //                       ),
-                    //                       child: Center(
-                    //                         child: FittedBox(
-                    //                           child: Text(getTranslated(
-                    //                               widget.label[i], context),
-                    //
-                    //                               // widget
-                    //                               //     .product
-                    //                               //     .choiceOptions[index]
-                    //                               //     .options[i],
-                    //                               maxLines: 1,
-                    //                               overflow:
-                    //                               TextOverflow.ellipsis,
-                    //                               style:
-                    //                               titilliumRegular.copyWith(
-                    //                                 fontSize: Dimensions
-                    //                                     .FONT_SIZE_DEFAULT,
-                    //                                 color:
-                    //                                 details.variationIndex[
-                    //                                 index] !=
-                    //                                     i
-                    //                                     ? ColorResources
-                    //                                     .getTextTitle(
-                    //                                     context)
-                    //                                     : Theme
-                    //                                     .of(context)
-                    //                                     .primaryColor,
-                    //                               )),
-                    //                         ),
-                    //                       ),
-                    //                     ),
-                    //                   );
-                    //                 },
-                    //               ),
-                    //             ),
-                    //           ),
-                    //
-                    //         ]);
-                    //   },
-                    // ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: widget.product.choiceOptions.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                  '${getTranslated('packet', context)}' +
+                                      "  : ",
+                                  style: robotoBold),
+                              // Text('${getTranslated('available', context)} '+' '+'${widget.product.choiceOptions[index].title} : ', style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_DEFAULT)),
+                              // SizedBox(
+                              //     width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GridView.builder(
+                                    reverse: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 4,
+                                      crossAxisSpacing: 5,
+                                      mainAxisSpacing: 15,
+                                      childAspectRatio: (1 / .55),
+                                    ),
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: 2,
+
+                                    // itemCount: widget.product.choiceOptions[index].options.length,
+                                    itemBuilder: (context, i) {
+                                      return InkWell(
+                                        onTap: () {
+                                          Provider.of<ProductDetailsProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .setCartVariationIndex(index, i);
+                                          // Provider.of<ProductDetailsProvider>(
+                                          //     context,
+                                          //     listen: false).selectFunction(i);
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: Dimensions
+                                                  .PADDING_SIZE_EXTRA_SMALL),
+                                          decoration: BoxDecoration(
+                                            // color: details.variationIndex[index] != i ? Theme.of(context).highlightColor : ColorResources.getPrimary(context),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            border: details.variationIndex[
+                                                        index] !=
+                                                    i
+                                                ? null
+                                                : Border.all(
+                                                    color:
+                                                        details.variationIndex[
+                                                                    index] !=
+                                                                i
+                                                            ? Theme.of(context)
+                                                                .highlightColor
+                                                            : ColorResources
+                                                                .getPrimary(
+                                                                    context),
+                                                    width: 2),
+                                          ),
+                                          child: Center(
+                                            child: FittedBox(
+                                              child: Text(
+                                                  getTranslated(
+                                                      widget.label[i], context),
+
+                                                  // widget
+                                                  //     .product
+                                                  //     .choiceOptions[index]
+                                                  //     .options[i],
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style:
+                                                      titilliumRegular.copyWith(
+                                                    fontSize: Dimensions
+                                                        .FONT_SIZE_DEFAULT,
+                                                    color:
+                                                        details.variationIndex[
+                                                                    index] !=
+                                                                i
+                                                            ? ColorResources
+                                                                .getTextTitle(
+                                                                    context)
+                                                            : Theme.of(context)
+                                                                .primaryColor,
+                                                  )),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ]);
+                      },
+                    ),
 
                     SizedBox(
                       height: Dimensions.PADDING_SIZE_SMALL,
@@ -554,254 +538,227 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
 
                     Row(
                       children: [
-                        Provider
-                            .of<CartProvider>(context)
-                            .isLoading
+                        Provider.of<CartProvider>(context).isLoading
                             ? Center(
-                          child: CircularProgressIndicator(
-                            valueColor: new AlwaysStoppedAnimation<Color>(
-                              Theme
-                                  .of(context)
-                                  .primaryColor,
-                            ),
-                          ),
-                        )
+                                child: CircularProgressIndicator(
+                                  valueColor: new AlwaysStoppedAnimation<Color>(
+                                    Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              )
                             : Expanded(
-                          child: CustomButton(
-                              buttonText: getTranslated(
-                                  _stock < 1
-                                      ? 'out_of_stock'
-                                      : 'add_to_cart',
-                                  context),
-                              onTap: _stock < 1
-                                  ? null
-                                  : () {
-                                if (_stock > 0) {
-                                  CartModel cart = CartModel(
-                                      widget.product.id,
-                                      widget.product.thumbnail,
-                                      widget.product.name,
-                                      widget.product.addedBy ==
-                                          'seller'
-                                          ? '${Provider
-                                          .of<SellerProvider>(
-                                          context, listen: false)
-                                          .sellerModel
-                                          .seller
-                                          .fName} '
-                                          '${Provider
-                                          .of<SellerProvider>(
-                                          context, listen: false)
-                                          .sellerModel
-                                          .seller
-                                          .lName}'
-                                          : 'admin',
-                                      price,
-                                      priceWithDiscount,
-                                      details.quantity,
-                                      _stock,
-                                      widget.product.colors.length >
-                                          0
-                                          ? widget
-                                          .product
-                                          .colors[details
-                                          .variantIndex]
-                                          .name
-                                          : '',
-                                      widget.product.colors.length >
-                                          0
-                                          ? widget
-                                          .product
-                                          .colors[details
-                                          .variantIndex]
-                                          .code
-                                          : '',
-                                      _variation,
-                                      widget.product.discount,
-                                      widget.product.discountType,
-                                      widget.product.tax,
-                                      widget.product.taxType,
-                                      1,
-                                      '',
-                                      widget.product.userId,
-                                      '',
-                                      '',
-                                      '',
-                                      widget.product.choiceOptions,
-                                      Provider
-                                          .of<ProductDetailsProvider>(
-                                          context,
-                                          listen: false)
-                                          .variationIndex,
-                                      widget.product.isMultiPly == 1
-                                          ? widget.product
-                                          .shippingCost *
-                                          details.quantity
-                                          : widget.product
-                                          .shippingCost ??
-                                          0);
+                                child: CustomButton(
+                                    buttonText: getTranslated(
+                                        _stock < 1
+                                            ? 'out_of_stock'
+                                            : 'add_to_cart',
+                                        context),
+                                    onTap: _stock < 1
+                                        ? null
+                                        : () {
+                                            if (_stock > 0) {
+                                              CartModel cart = CartModel(
+                                                  widget.product.id,
+                                                  widget.product.thumbnail,
+                                                  widget.product.name,
+                                                  widget.product.addedBy ==
+                                                          'seller'
+                                                      ? '${Provider.of<SellerProvider>(context, listen: false).sellerModel.seller.fName} '
+                                                          '${Provider.of<SellerProvider>(context, listen: false).sellerModel.seller.lName}'
+                                                      : 'admin',
+                                                  price,
+                                                  priceWithDiscount,
+                                                  details.quantity,
+                                                  _stock,
+                                                  widget.product.colors.length >
+                                                          0
+                                                      ? widget
+                                                          .product
+                                                          .colors[details
+                                                              .variantIndex]
+                                                          .name
+                                                      : '',
+                                                  widget.product.colors.length >
+                                                          0
+                                                      ? widget
+                                                          .product
+                                                          .colors[details
+                                                              .variantIndex]
+                                                          .code
+                                                      : '',
+                                                  _variation,
+                                                  widget.product.discount
+                                                      .toDouble(),
+                                                  widget.product.discountType,
+                                                  widget.product.tax.toDouble(),
+                                                  widget.product.taxType,
+                                                  1,
+                                                  '',
+                                                  widget.product.userId,
+                                                  '',
+                                                  '',
+                                                  '',
+                                                  widget.product.choiceOptions,
+                                                  Provider.of<ProductDetailsProvider>(
+                                                          context,
+                                                          listen: false)
+                                                      .variationIndex,
+                                                  widget.product.multiplyQty ==
+                                                          1
+                                                      ? widget.product
+                                                              .shippingCost *
+                                                          details.quantity
+                                                      : widget.product
+                                                              .shippingCost ??
+                                                          0);
 
-                                  // cart.variations = _variation;
+                                              // cart.variations = _variation;
 
-                                  if (Provider.of<AuthProvider>(
-                                      context,
-                                      listen: false)
-                                      .isLoggedIn()) {
-                                    Provider.of<CartProvider>(
-                                        context,
-                                        listen: false)
-                                        .addToCartAPI(
-                                      cart,
-                                      route,
-                                      context,
-                                      widget.product.choiceOptions,
-                                      Provider
-                                          .of<ProductDetailsProvider>(
-                                          context,
-                                          listen: false)
-                                          .variationIndex,
-                                    );
-                                  } else {
-                                    Provider.of<CartProvider>(
-                                        context,
-                                        listen: false)
-                                        .addToCart(cart);
-                                    Navigator.pop(context);
-                                    showCustomSnackBar(
-                                        getTranslated(
-                                            'added_to_cart',
-                                            context),
-                                        context,
-                                        isError: false);
-                                  }
-                                }
-                              }),
-                        ),
+                                              if (Provider.of<AuthProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .isLoggedIn()) {
+                                                Provider.of<CartProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .addToCartAPI(
+                                                  cart,
+                                                  route,
+                                                  context,
+                                                  widget.product.choiceOptions,
+                                                  Provider.of<ProductDetailsProvider>(
+                                                          context,
+                                                          listen: false)
+                                                      .variationIndex,
+                                                );
+                                              } else {
+                                                Provider.of<CartProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .addToCart(cart);
+                                                Navigator.pop(context);
+                                                showCustomSnackBar(
+                                                    getTranslated(
+                                                        'added_to_cart',
+                                                        context),
+                                                    context,
+                                                    isError: false);
+                                              }
+                                            }
+                                          }),
+                              ),
                         SizedBox(width: Dimensions.PADDING_SIZE_DEFAULT),
-                        Provider
-                            .of<CartProvider>(context)
-                            .isLoading
+                        Provider.of<CartProvider>(context).isLoading
                             ? SizedBox()
                             : Expanded(
-                          child: CustomButton(
-                              isBuy: true,
-                              buttonText: getTranslated(
-                                  _stock < 1 ? 'out_of_stock' : 'buy_now',
-                                  context),
-                              onTap: _stock < 1
-                                  ? null
-                                  : () {
-                                if (_stock > 0) {
-                                  CartModel cart = CartModel(
-                                      widget.product.id,
-                                      widget.product.thumbnail,
-                                      widget.product.name,
-                                      widget.product.addedBy ==
-                                          'seller'
-                                          ? '${Provider
-                                          .of<SellerProvider>(
-                                          context, listen: false)
-                                          .sellerModel
-                                          .seller
-                                          .fName} '
-                                          '${Provider
-                                          .of<SellerProvider>(
-                                          context, listen: false)
-                                          .sellerModel
-                                          .seller
-                                          .lName}'
-                                          : 'admin',
-                                      price,
-                                      priceWithDiscount,
-                                      details.quantity,
-                                      _stock,
-                                      widget.product.colors.length >
-                                          0
-                                          ? widget
-                                          .product
-                                          .colors[details
-                                          .variantIndex]
-                                          .name
-                                          : '',
-                                      widget.product.colors.length >
-                                          0
-                                          ? widget
-                                          .product
-                                          .colors[details
-                                          .variantIndex]
-                                          .code
-                                          : '',
-                                      _variation,
-                                      widget.product.discount,
-                                      widget.product.discountType,
-                                      widget.product.tax,
-                                      widget.product.taxType,
-                                      1,
-                                      '',
-                                      widget.product.userId,
-                                      '',
-                                      '',
-                                      '',
-                                      widget.product.choiceOptions,
-                                      Provider
-                                          .of<ProductDetailsProvider>(
-                                          context,
-                                          listen: false)
-                                          .variationIndex,
-                                      widget.product.isMultiPly == 1
-                                          ? widget.product
-                                          .shippingCost *
-                                          details.quantity
-                                          : widget.product
-                                          .shippingCost ??
-                                          0);
+                                child: CustomButton(
+                                    isBuy: true,
+                                    buttonText: getTranslated(
+                                        _stock < 1 ? 'out_of_stock' : 'buy_now',
+                                        context),
+                                    onTap: _stock < 1
+                                        ? null
+                                        : () {
+                                            if (_stock > 0) {
+                                              CartModel cart = CartModel(
+                                                  widget.product.id,
+                                                  widget.product.thumbnail,
+                                                  widget.product.name,
+                                                  widget.product.addedBy ==
+                                                          'seller'
+                                                      ? '${Provider.of<SellerProvider>(context, listen: false).sellerModel.seller.fName} '
+                                                          '${Provider.of<SellerProvider>(context, listen: false).sellerModel.seller.lName}'
+                                                      : 'admin',
+                                                  price,
+                                                  priceWithDiscount,
+                                                  details.quantity,
+                                                  _stock,
+                                                  widget.product.colors.length >
+                                                          0
+                                                      ? widget
+                                                          .product
+                                                          .colors[details
+                                                              .variantIndex]
+                                                          .name
+                                                      : '',
+                                                  widget.product.colors.length >
+                                                          0
+                                                      ? widget
+                                                          .product
+                                                          .colors[details
+                                                              .variantIndex]
+                                                          .code
+                                                      : '',
+                                                  _variation,
+                                                  widget.product.discount
+                                                      .toDouble(),
+                                                  widget.product.discountType,
+                                                  widget.product.tax.toDouble(),
+                                                  widget.product.taxType,
+                                                  1,
+                                                  '',
+                                                  widget.product.userId,
+                                                  '',
+                                                  '',
+                                                  '',
+                                                  widget.product.choiceOptions,
+                                                  Provider.of<ProductDetailsProvider>(
+                                                          context,
+                                                          listen: false)
+                                                      .variationIndex,
+                                                  widget.product.multiplyQty ==
+                                                          1
+                                                      ? widget.product
+                                                              .shippingCost *
+                                                          details.quantity
+                                                      : widget.product
+                                                              .shippingCost ??
+                                                          0);
 
-                                  // cart.variations = _variation;
+                                              // cart.variations = _variation;
 
-                                  if (Provider.of<AuthProvider>(
-                                      context,
-                                      listen: false)
-                                      .isLoggedIn()) {
-                                    Provider.of<CartProvider>(
-                                        context,
-                                        listen: false)
-                                        .addToCartAPI(
-                                      cart,
-                                      route,
-                                      context,
-                                      widget.product
-                                          .choiceOptions,
-                                      Provider
-                                          .of<ProductDetailsProvider>(
-                                          context,
-                                          listen: false)
-                                          .variationIndex,
-                                    )
-                                        .then(
-                                          (value) =>
-                                          Navigator.of(
-                                              context)
-                                              .push(MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CartScreen())),
-                                    );
-                                  } else {
-                                    Provider.of<CartProvider>(
-                                        context,
-                                        listen: false)
-                                        .addToCart(cart);
-                                    Future.delayed(
-                                        const Duration(seconds: 1),
-                                            () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      CartScreen()));
-                                        });
-                                  }
-                                }
-                              }),
-                        ),
+                                              if (Provider.of<AuthProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .isLoggedIn()) {
+                                                Provider.of<CartProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .addToCartAPI(
+                                                      cart,
+                                                      route,
+                                                      context,
+                                                      widget.product
+                                                          .choiceOptions,
+                                                      Provider.of<ProductDetailsProvider>(
+                                                              context,
+                                                              listen: false)
+                                                          .variationIndex,
+                                                    )
+                                                    .then(
+                                                      (value) => Navigator.of(
+                                                              context)
+                                                          .push(MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  CartScreen())),
+                                                    );
+                                              } else {
+                                                Provider.of<CartProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .addToCart(cart);
+                                                Future.delayed(
+                                                    const Duration(seconds: 1),
+                                                    () {
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              CartScreen()));
+                                                });
+                                              }
+                                            }
+                                          }),
+                              ),
                       ],
                     ),
                     // Cart button
@@ -845,18 +802,16 @@ class QuantityButton extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border:
-            Border.all(width: 1, color: Theme
-                .of(context)
-                .primaryColor)),
+                Border.all(width: 1, color: Theme.of(context).primaryColor)),
         child: Icon(
           isIncrement ? Icons.add : Icons.remove,
           color: isIncrement
               ? quantity >= stock
-              ? ColorResources.getLowGreen(context)
-              : ColorResources.getPrimary(context)
+                  ? ColorResources.getLowGreen(context)
+                  : ColorResources.getPrimary(context)
               : quantity > 1
-              ? ColorResources.getPrimary(context)
-              : ColorResources.getTextTitle(context),
+                  ? ColorResources.getPrimary(context)
+                  : ColorResources.getTextTitle(context),
           size: isCartWidget ? 26 : 20,
         ),
       ),

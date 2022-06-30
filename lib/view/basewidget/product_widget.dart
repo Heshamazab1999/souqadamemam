@@ -23,8 +23,8 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String ratting =
-        productModel.rating != null && productModel.rating.length != 0
-            ? productModel.rating[0].average
+        productModel.reviews != null && productModel.reviews.length != 0
+            ? productModel.reviews[0].average
             : "0";
 
     return InkWell(
@@ -107,7 +107,7 @@ class ProductWidget extends StatelessWidget {
                               size: 18,
                             ),
                             Text(
-                                '(${productModel.reviewCount.toString() ?? 0})',
+                                '(${productModel.reviewsCount.toString() ?? 0})',
                                 style: robotoRegular.copyWith(
                                   fontSize: Dimensions.FONT_SIZE_SMALL,
                                 )),
@@ -116,7 +116,7 @@ class ProductWidget extends StatelessWidget {
                       productModel.discount != null && productModel.discount > 0
                           ? Text(
                               PriceConverter.convertPrice(
-                                  context, productModel.unitPrice),
+                                  context, productModel.unitPrice.toDouble()),
                               style: titleRegular.copyWith(
                                 color: ColorResources.getRed(context),
                                 decoration: TextDecoration.lineThrough,
@@ -155,9 +155,9 @@ class ProductWidget extends StatelessWidget {
                           ),
                           Text(
                             PriceConverter.convertPrice(
-                                context, productModel.unitPrice,
+                                context, productModel.unitPrice.toDouble(),
                                 discountType: productModel.discountType,
-                                discount: productModel.discount),
+                                discount: productModel.discount.toDouble()),
                             style: titilliumSemiBold.copyWith(
                                 color: ColorResources.getPrimary(context)),
                           ),
@@ -190,8 +190,8 @@ class ProductWidget extends StatelessWidget {
                       child: Text(
                         PriceConverter.percentageCalculation(
                             context,
-                            productModel.unitPrice,
-                            productModel.discount,
+                            productModel.unitPrice.toDouble(),
+                            productModel.discount.toDouble(),
                             productModel.discountType),
                         style: robotoRegular.copyWith(
                             color: Theme.of(context).highlightColor,

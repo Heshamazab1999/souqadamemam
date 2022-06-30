@@ -31,7 +31,7 @@ class ProductTitleView extends StatelessWidget {
         _endingPrice = _priceList[_priceList.length-1];
       }
     }else {
-      _startingPrice = productModel.unitPrice;
+      _startingPrice = productModel.unitPrice.toDouble();
     }
 
     return productModel != null? Container(
@@ -54,8 +54,8 @@ class ProductTitleView extends StatelessWidget {
                 ):SizedBox(),
                 SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL),
                 Text(
-                  '${_startingPrice != null ?PriceConverter.convertPrice(context, _startingPrice, discount: productModel.discount, discountType: productModel.discountType):''}'
-                      '${_endingPrice !=null ? ' - ${PriceConverter.convertPrice(context, _endingPrice, discount: productModel.discount, discountType: productModel.discountType)}' : ''}',
+                  '${_startingPrice != null ?PriceConverter.convertPrice(context, _startingPrice, discount: productModel.discount.toDouble(), discountType: productModel.discountType):''}'
+                      '${_endingPrice !=null ? ' - ${PriceConverter.convertPrice(context, _endingPrice, discount: productModel.discount.toDouble(), discountType: productModel.discountType)}' : ''}',
                   style: titilliumBold.copyWith(color: ColorResources.getPrimary(context), fontSize: Dimensions.FONT_SIZE_LARGE),
                 ),
               ],),
@@ -84,8 +84,8 @@ class ProductTitleView extends StatelessWidget {
               SizedBox(width: 5),
               Row(children: [
                 Icon(Icons.star, color: Colors.orange,),
-                Text('${productModel.rating != null ? productModel.rating.length > 0 ?
-                double.parse(productModel.rating[0].average) : 0.0 : 0.0}')
+                Text('${productModel.reviews != null ? productModel.reviews.length > 0 ?
+                double.parse(productModel.reviews[0].average) : 0.0 : 0.0}')
               ],),
 
 

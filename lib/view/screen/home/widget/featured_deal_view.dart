@@ -124,17 +124,17 @@ class FeaturedDealsView extends StatelessWidget {
                                           featuredDealProvider
                                                           .featuredDealProductList[
                                                               index]
-                                                          .rating !=
+                                                          .reviews !=
                                                       null &&
                                                   featuredDealProvider
                                                       .featuredDealProductList[
                                                           index]
-                                                      .rating
+                                                      .reviews
                                                       .isNotEmpty
                                               ? double.parse(featuredDealProvider
                                                       .featuredDealProductList[
                                                           index]
-                                                      .rating[0]
+                                                      .reviews[0]
                                                       .average)
                                                   .toStringAsFixed(1)
                                               : '0.0',
@@ -155,7 +155,7 @@ class FeaturedDealsView extends StatelessWidget {
                                                 : Colors.orange,
                                             size: 15),
                                         Text(
-                                            '(${featuredDealProvider.featuredDealProductList[index].reviewCount.toString() ?? 0})',
+                                            '(${featuredDealProvider.featuredDealProductList[index].reviewsCount.toString() ?? 0})',
                                             style: robotoRegular.copyWith(
                                               color: Provider.of<ThemeProvider>(
                                                           context)

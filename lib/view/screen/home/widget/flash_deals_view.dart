@@ -189,12 +189,12 @@ class FlashDealsView extends StatelessWidget {
                                                                   megaProvider
                                                                               .flashDealList[
                                                                                   index]
-                                                                              .rating
+                                                                              .reviews
                                                                               .length !=
                                                                           0
                                                                       ? double.parse(megaProvider
                                                                               .flashDealList[index]
-                                                                              .rating[0]
+                                                                              .reviews[0]
                                                                               .average)
                                                                           .toStringAsFixed(1)
                                                                       : '0.0',
@@ -218,7 +218,7 @@ class FlashDealsView extends StatelessWidget {
                                                                             .orange,
                                                                     size: 15),
                                                                 Text(
-                                                                    '(${megaProvider.flashDealList[index].reviewCount.toString() ?? 0})',
+                                                                    '(${megaProvider.flashDealList[index].reviewsCount.toString() ?? 0})',
                                                                     style: robotoRegular
                                                                         .copyWith(
                                                                       fontSize:
@@ -231,9 +231,9 @@ class FlashDealsView extends StatelessWidget {
                                                                           0
                                                                       ? PriceConverter.convertPrice(
                                                                           context,
-                                                                          megaProvider
-                                                                              .flashDealList[index]
-                                                                              .unitPrice)
+                                                                    double.parse(  megaProvider
+                                                                        .flashDealList[index]
+                                                                        .largeUnitPrice))
                                                                       : '',
                                                                   style: robotoBold
                                                                       .copyWith(
@@ -253,10 +253,9 @@ class FlashDealsView extends StatelessWidget {
                                                                 Text(
                                                                   PriceConverter.convertPrice(
                                                                       context,
-                                                                      megaProvider
-                                                                          .flashDealList[
-                                                                              index]
-                                                                          .unitPrice,
+                                                                      double.parse(  megaProvider
+                                                                          .flashDealList[index]
+                                                                          .largeUnitPrice),
                                                                       discountType: megaProvider
                                                                           .flashDealList[
                                                                               index]
@@ -264,7 +263,7 @@ class FlashDealsView extends StatelessWidget {
                                                                       discount: megaProvider
                                                                           .flashDealList[
                                                                               index]
-                                                                          .discount),
+                                                                          .discount.toDouble()),
                                                                   style: robotoBold
                                                                       .copyWith(
                                                                           color:
@@ -337,14 +336,13 @@ class FlashDealsView extends StatelessWidget {
                                                               PriceConverter
                                                                   .percentageCalculation(
                                                                 context,
+                                                                  double.parse(  megaProvider
+                                                                      .flashDealList[index]
+                                                                      .largeUnitPrice),
                                                                 megaProvider
                                                                     .flashDealList[
                                                                         index]
-                                                                    .unitPrice,
-                                                                megaProvider
-                                                                    .flashDealList[
-                                                                        index]
-                                                                    .discount,
+                                                                    .discount.toDouble(),
                                                                 megaProvider
                                                                     .flashDealList[
                                                                         index]
@@ -483,13 +481,13 @@ class FlashDealsView extends StatelessWidget {
                                                 megaProvider
                                                             .flashDealList[
                                                                 index]
-                                                            .rating
+                                                            .reviews
                                                             .length !=
                                                         0
                                                     ? double.parse(megaProvider
                                                             .flashDealList[
                                                                 index]
-                                                            .rating[0]
+                                                            .reviews[0]
                                                             .average)
                                                         .toStringAsFixed(1)
                                                     : '0.0',
@@ -506,7 +504,7 @@ class FlashDealsView extends StatelessWidget {
                                                           : Colors.orange,
                                                   size: 15),
                                               Text(
-                                                  '(${megaProvider.flashDealList[index].reviewCount.toString() ?? 0})',
+                                                  '(${megaProvider.flashDealList[index].reviewsCount.toString() ?? 0})',
                                                   style: robotoRegular.copyWith(
                                                     fontSize: Dimensions
                                                         .FONT_SIZE_SMALL,
@@ -527,10 +525,9 @@ class FlashDealsView extends StatelessWidget {
                                                       ? PriceConverter
                                                           .convertPrice(
                                                               context,
-                                                              megaProvider
-                                                                  .flashDealList[
-                                                                      index]
-                                                                  .unitPrice)
+                                                      double.parse(  megaProvider
+                                                          .flashDealList[index]
+                                                          .largeUnitPrice))
                                                       : '',
                                                   style: robotoRegular.copyWith(
                                                     color:
@@ -549,15 +546,15 @@ class FlashDealsView extends StatelessWidget {
                                                 Text(
                                                   PriceConverter.convertPrice(
                                                       context,
-                                                      megaProvider
+                                                      double.parse(  megaProvider
                                                           .flashDealList[index]
-                                                          .unitPrice,
+                                                          .largeUnitPrice),
                                                       discountType: megaProvider
                                                           .flashDealList[index]
                                                           .discountType,
                                                       discount: megaProvider
                                                           .flashDealList[index]
-                                                          .discount),
+                                                          .discount.toDouble()),
                                                   style: titleRegular.copyWith(
                                                       color: ColorResources
                                                           .getPrimary(context),
@@ -598,10 +595,11 @@ class FlashDealsView extends StatelessWidget {
                                             PriceConverter
                                                 .percentageCalculation(
                                               context,
+                                                double.parse(  megaProvider
+                                                    .flashDealList[index]
+                                                    .largeUnitPrice),
                                               megaProvider.flashDealList[index]
-                                                  .unitPrice,
-                                              megaProvider.flashDealList[index]
-                                                  .discount,
+                                                  .discount.toDouble(),
                                               megaProvider.flashDealList[index]
                                                   .discountType,
                                             ),

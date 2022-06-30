@@ -127,8 +127,8 @@ class ProductImageView extends StatelessWidget {
                         color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.only(bottomRight: Radius.circular(Dimensions.PADDING_SIZE_SMALL))
                       ),
-                      child: Text('${PriceConverter.percentageCalculation(context, productModel.unitPrice,
-                          productModel.discount, productModel.discountType)}',
+                      child: Text('${PriceConverter.percentageCalculation(context, productModel.unitPrice.toDouble(),
+                          productModel.discount.toDouble(), productModel.discountType)}',
                         style: titilliumRegular.copyWith(color: Theme.of(context).cardColor, fontSize: Dimensions.FONT_SIZE_LARGE),
                       ),
                     ),

@@ -18,7 +18,7 @@ class RecommendedProductView extends StatelessWidget {
       children: [
         Consumer<ProductProvider>(
           builder: (context, recommended, child) {
-            String ratting = recommended.recommendedProduct != null && recommended.recommendedProduct.rating != null && recommended.recommendedProduct.rating.length != 0? recommended.recommendedProduct.rating[0].average : "0";
+            String ratting = recommended.recommendedProduct != null && recommended.recommendedProduct.reviews != null && recommended.recommendedProduct.reviews.length != 0? recommended.recommendedProduct.reviews[0].average : "0";
 
             return recommended.recommendedProduct != null?
             InkWell(
@@ -119,7 +119,7 @@ class RecommendedProductView extends StatelessWidget {
 
                                 SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL),
                                 recommended.recommendedProduct !=null && recommended.recommendedProduct.discount!= null && recommended.recommendedProduct.discount > 0  ? Text(
-                                  PriceConverter.convertPrice(context, recommended.recommendedProduct.unitPrice),
+                                  PriceConverter.convertPrice(context, recommended.recommendedProduct.unitPrice.toDouble()),
                                   style: robotoBold.copyWith(
                                     color: ColorResources.getRed(context),
                                     decoration: TextDecoration.lineThrough,
@@ -129,9 +129,9 @@ class RecommendedProductView extends StatelessWidget {
                                 SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL),
                                 recommended.recommendedProduct != null && recommended.recommendedProduct.unitPrice != null?
                                 Text(
-                                  PriceConverter.convertPrice(context, recommended.recommendedProduct.unitPrice,
+                                  PriceConverter.convertPrice(context, recommended.recommendedProduct.unitPrice.toDouble(),
                                       discountType: recommended.recommendedProduct.discountType,
-                                      discount: recommended.recommendedProduct.discount),
+                                      discount: recommended.recommendedProduct.discount.toDouble()),
                                   style: titilliumSemiBold.copyWith(
                                     color: ColorResources.getPrimary(context),
                                     fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE,

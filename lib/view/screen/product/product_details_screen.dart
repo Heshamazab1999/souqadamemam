@@ -57,7 +57,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     ScrollController _scrollController = ScrollController();
-    String ratting = widget.product.rating != null && widget.product.rating.length != 0? widget.product.rating[0].average.toString() : "0";
+    String ratting = widget.product.reviews != null && widget.product.reviews.length != 0? widget.product.reviews[0].average.toString() : "0";
     _loadData(context);
     return Consumer<ProductDetailsProvider>(
       builder: (context, details, child) {
