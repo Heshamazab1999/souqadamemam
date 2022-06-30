@@ -132,119 +132,47 @@ class ProductTitleView extends StatelessWidget {
             ]) : SizedBox(),
             productModel.colors.length > 0 ? SizedBox(height: Dimensions.PADDING_SIZE_SMALL) : SizedBox(),
 
-            // Variation
-            // productModel.choiceOptions!=null && productModel.choiceOptions.length>0?
-            // ListView.builder(
-            //   shrinkWrap: true,
-            //   itemCount: productModel.choiceOptions.length,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   itemBuilder: (context, index) {
-            //     return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            //       Text('${getTranslated('available', context)}'+' '+'${productModel.choiceOptions[index].title} :',
-            //           style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
-            //       SizedBox(width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-            //       Expanded(
-            //         child: GridView.builder(
-            //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //             crossAxisCount: 4,
-            //             crossAxisSpacing: 5,
-            //             mainAxisSpacing: 5,
-            //             childAspectRatio: (1 / .7),
-            //           ),
-            //           shrinkWrap: true,
-            //           physics: NeverScrollableScrollPhysics(),
-            //           itemCount: productModel.choiceOptions[index].options.length,
-            //           itemBuilder: (context, i) {
-            //             return Center(
-            //               child: Text(productModel.choiceOptions[index].options[i], maxLines: 1,
-            //                   overflow: TextOverflow.ellipsis, style: titilliumRegular.copyWith(
-            //                     fontSize: Dimensions.FONT_SIZE_DEFAULT,
-            //                    )),
-            //             );
-            //           },
-            //         ),
-            //       ),
-            //     ]);
-            //   },
-            // ):SizedBox(),
-            Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text('${getTranslated('packet', context)}' +
-                      "  : ",
-                      style: robotoBold),
-                  // Text('${getTranslated('available', context)} '+' '+'${widget.product.choiceOptions[index].title} : ', style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_DEFAULT)),
-                  // SizedBox(
-                  //     width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GridView.builder(
-                        reverse: true,
-                        gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 15,
-                          childAspectRatio: (1 / .55),
-                        ),
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: 2,
+           // Variation
+           //  productModel.choiceOptions!=null && productModel.choiceOptions.length>0?
+           //  ListView.builder(
+           //    shrinkWrap: true,
+           //    itemCount: productModel.choiceOptions.length,
+           //    physics: NeverScrollableScrollPhysics(),
+           //    itemBuilder: (context, index) {
+           //      return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+           //        Text('${getTranslated('available', context)}'+' '+'${productModel.choiceOptions[index].title} :',
+           //            style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
+           //        SizedBox(width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+           //        Expanded(
+           //          child: GridView.builder(
+           //            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+           //              crossAxisCount: 4,
+           //              crossAxisSpacing: 5,
+           //              mainAxisSpacing: 5,
+           //              childAspectRatio: (1 / .7),
+           //            ),
+           //            shrinkWrap: true,
+           //            physics: NeverScrollableScrollPhysics(),
+           //            itemCount: productModel.choiceOptions[index].options.length,
+           //            itemBuilder: (context, i) {
+           //              return Center(
+           //                child: Row(
+           //                  children: [
+           //                    Text(productModel.choiceOptions[index].options[i], maxLines: 1,
+           //                        overflow: TextOverflow.ellipsis, style: titilliumRegular.copyWith(
+           //                          fontSize: Dimensions.FONT_SIZE_DEFAULT,
+           //                         )),
+           //
+           //                  ],
+           //                ),
+           //              );
+           //            },
+           //          ),
+           //        ),
+           //      ]);
+           //    },
+           //  ):SizedBox(),
 
-                        // itemCount: widget.product.choiceOptions[index].options.length,
-                        itemBuilder: (context, i) {
-                          return InkWell(
-                            onTap: () {
-
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Dimensions
-                                      .PADDING_SIZE_EXTRA_SMALL),
-                              decoration: BoxDecoration(
-                                //color: details.variationIndex[index] != i ? Theme.of(context).highlightColor : ColorResources.getPrimary(context),
-                                borderRadius:
-                                BorderRadius.circular(5),
-                                border:
-                                Border.all(
-                                    color: Theme
-                                        .of(context)
-                                        .primaryColor,
-                                    width: 2),
-                              ),
-                              child: Center(
-                                child: FittedBox(
-                                  child: Text(getTranslated(
-                                      label[i], context),
-
-                                      // widget
-                                      //     .product
-                                      //     .choiceOptions[index]
-                                      //     .options[i],
-                                      maxLines: 1,
-                                      overflow:
-                                      TextOverflow.ellipsis,
-                                      style:
-                                      titilliumRegular.copyWith(
-                                        fontSize: Dimensions
-                                            .FONT_SIZE_DEFAULT,
-                                        color:
-                                         Theme
-                                            .of(context)
-                                            .primaryColor,
-                                      )),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-
-                ])
           ]);
         },
       ),
